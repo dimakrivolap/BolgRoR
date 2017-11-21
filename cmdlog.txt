@@ -1,0 +1,353 @@
+
+C:\Sites\registrdevby>rails generate model Post title:string summary:text body:text
+      invoke  active_record
+      create    db/migrate/20171121190625_create_posts.rb
+      create    app/models/post.rb
+      invoke    test_unit
+      create      test/models/post_test.rb
+      create      test/fixtures/posts.yml
+
+C:\Sites\registrdevby>rake db:migrate
+== 20171121190625 CreatePosts: migrating ======================================
+-- create_table(:posts)
+   -> 0.0014s
+== 20171121190625 CreatePosts: migrated (0.0016s) =============================
+
+
+C:\Sites\registrdevby>rails console
+Loading development environment (Rails 5.1.4)
+irb(main):001:0> Post.create(title: 'First title', summary: 'First summary', body: 'First body')
+   (0.5ms)  begin transaction
+  SQL (3.5ms)  INSERT INTO "posts" ("title", "summary", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["title", "First title"], ["summary", "First summary"], ["body", "First body"], ["created_at", "2017-11-21 19:08:03.439625"], ["updated_at", "2017-11-21 19:08:03.439625"]]
+   (3.0ms)  commit transaction
+=> #<Post id: 1, title: "First title", summary: "First summary", body: "First body", created_at: "2017-11-21 19:08:03", updated_at: "2017-11-21 19:08:03">
+irb(main):002:0> Post.create(title: 'Second title', summary: 'Second summary', body: 'Second body')
+   (0.0ms)  begin transaction
+  SQL (3.5ms)  INSERT INTO "posts" ("title", "summary", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["title", "Second title"], ["summary", "Second summary"], ["body", "Second body"], ["created_at", "2017-11-21 19:08:29.725894"], ["updated_at", "2017-11-21 19:08:29.725894"]]
+   (3.5ms)  commit transaction
+=> #<Post id: 2, title: "Second title", summary: "Second summary", body: "Second body", created_at: "2017-11-21 19:08:29", updated_at: "2017-11-21 19:08:29">
+irb(main):003:0> Post.all
+  Post Load (0.5ms)  SELECT  "posts".* FROM "posts" LIMIT ?  [["LIMIT", 11]]
+=> #<ActiveRecord::Relation [#<Post id: 1, title: "First title", summary: "First summary", body: "First body", created_at: "2017-11-21 19:08:03", updated_at: "2017-11-21 19:08:03">, #<Post id: 2, title: "Second title", summary: "Second summary", body: "Second body", created_at: "2017-11-21 19:08:29", updated_at: "2017-11-21 19:08:29">]>
+irb(main):004:0> exit
+
+C:\Sites\registrdevby>atom .
+
+C:\Sites\registrdevby>reke routes
+"reke" не является внутренней или внешней
+командой, исполняемой программой или пакетным файлом.
+
+C:\Sites\registrdevby>rake routes
+   Prefix Verb   URI Pattern               Controller#Action
+    posts GET    /posts(.:format)          posts#index
+          POST   /posts(.:format)          posts#create
+ new_post GET    /posts/new(.:format)      posts#new
+edit_post GET    /posts/:id/edit(.:format) posts#edit
+     post GET    /posts/:id(.:format)      posts#show
+          PATCH  /posts/:id(.:format)      posts#update
+          PUT    /posts/:id(.:format)      posts#update
+          DELETE /posts/:id(.:format)      posts#destroy
+
+C:\Sites\registrdevby>rails s
+=> Booting Puma
+=> Rails 5.1.4 application starting in development
+=> Run `rails server -h` for more startup options
+*** SIGUSR2 not implemented, signal based restart unavailable!
+*** SIGUSR1 not implemented, signal based restart unavailable!
+*** SIGHUP not implemented, signal based logs reopening unavailable!
+Puma starting in single mode...
+* Version 3.11.0 (ruby 2.3.3-p222), codename: Love Song
+* Min threads: 5, max threads: 5
+* Environment: development
+* Listening on tcp://0.0.0.0:3000
+Use Ctrl-C to stop
+Started GET "/" for 127.0.0.1 at 2017-11-21 22:38:49 +0300
+   (1.0ms)  SELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC
+Processing by Rails::WelcomeController#index as HTML
+  Rendering C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/railties-5.1.4/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered C:/RailsInstaller/Ruby2.3.3/lib/ruby/gems/2.3.0/gems/railties-5.1.4/lib/rails/templates/rails/welcome/index.html.erb (7.0ms)
+Completed 200 OK in 84ms (Views: 36.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/posts" for 127.0.0.1 at 2017-11-21 22:39:04 +0300
+Processing by PostsController#index as HTML
+  Rendering posts/index.html.erb within layouts/application
+  Post Load (0.0ms)  SELECT "posts".* FROM "posts"
+  Rendered posts/index.html.erb within layouts/application (15.0ms)
+Completed 200 OK in 427ms (Views: 414.1ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/posts" for 127.0.0.1 at 2017-11-21 22:39:22 +0300
+Processing by PostsController#index as HTML
+  Rendering posts/index.html.erb within layouts/application
+  Post Load (0.0ms)  SELECT "posts".* FROM "posts"
+  Rendered posts/index.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 86ms (Views: 76.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-11-21 22:40:22 +0300
+Processing by PostsController#index as HTML
+  Rendering posts/index.html.erb within layouts/application
+  Post Load (0.0ms)  SELECT "posts".* FROM "posts"
+  Rendered posts/index.html.erb within layouts/application (10.0ms)
+Completed 200 OK in 70ms (Views: 58.8ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-11-21 22:40:39 +0300
+Processing by PostsController#index as HTML
+  Rendering posts/index.html.erb within layouts/application
+  Post Load (1.0ms)  SELECT "posts".* FROM "posts"
+  Rendered posts/index.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 91ms (Views: 66.4ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-11-21 22:40:41 +0300
+Processing by PostsController#index as HTML
+  Rendering posts/index.html.erb within layouts/application
+  Post Load (1.0ms)  SELECT "posts".* FROM "posts"
+  Rendered posts/index.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 79ms (Views: 68.3ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/posts" for 127.0.0.1 at 2017-11-21 22:40:46 +0300
+Processing by PostsController#index as HTML
+  Rendering posts/index.html.erb within layouts/application
+  Post Load (1.0ms)  SELECT "posts".* FROM "posts"
+  Rendered posts/index.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 72ms (Views: 63.4ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-11-21 22:40:49 +0300
+Processing by PostsController#index as HTML
+  Rendering posts/index.html.erb within layouts/application
+  Post Load (0.0ms)  SELECT "posts".* FROM "posts"
+  Rendered posts/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 63ms (Views: 48.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-11-21 22:45:36 +0300
+Processing by PostsController#index as HTML
+  Rendering posts/index.html.erb within layouts/application
+  Post Load (0.0ms)  SELECT "posts".* FROM "posts"
+  Rendered posts/index.html.erb within layouts/application (10.0ms)
+Completed 200 OK in 79ms (Views: 56.4ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/post/1" for 127.0.0.1 at 2017-11-21 22:45:49 +0300
+
+ActionController::RoutingError (No route matches [GET] "/post/1"):
+
+actionpack (5.1.4) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.4) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.4) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.4) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.4) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.4) lib/rails/engine.rb:522:in `call'
+puma (3.11.0) lib/puma/configuration.rb:225:in `call'
+puma (3.11.0) lib/puma/server.rb:624:in `handle_request'
+puma (3.11.0) lib/puma/server.rb:438:in `process_client'
+puma (3.11.0) lib/puma/server.rb:302:in `block in run'
+puma (3.11.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/posts/1" for 127.0.0.1 at 2017-11-21 22:46:08 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Post Load (0.5ms)  SELECT  "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.erb within layouts/application
+  Rendered posts/show.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 64ms (Views: 48.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/posts/1" for 127.0.0.1 at 2017-11-21 22:46:22 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Post Load (0.0ms)  SELECT  "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.erb within layouts/application
+  Rendered posts/show.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 64ms (Views: 53.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/posts/1" for 127.0.0.1 at 2017-11-21 22:46:24 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Post Load (0.0ms)  SELECT  "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.erb within layouts/application
+  Rendered posts/show.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 59ms (Views: 48.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/posts/1" for 127.0.0.1 at 2017-11-21 22:53:14 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Post Load (0.0ms)  SELECT  "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?  [["id", 1], ["LIMIT", 1]]
+  Rendering posts/show.html.erb within layouts/application
+  Rendered posts/show.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 79ms (Views: 62.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/posts" for 127.0.0.1 at 2017-11-21 22:53:19 +0300
+Processing by PostsController#index as HTML
+  Rendering posts/index.html.erb within layouts/application
+  Post Load (0.5ms)  SELECT "posts".* FROM "posts"
+  Rendered posts/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 56ms (Views: 47.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-11-21 22:53:22 +0300
+Processing by PostsController#index as HTML
+  Rendering posts/index.html.erb within layouts/application
+  Post Load (0.0ms)  SELECT "posts".* FROM "posts"
+  Rendered posts/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 56ms (Views: 47.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2017-11-21 22:53:41 +0300
+
+AbstractController::ActionNotFound (The action 'new' could not be found for PostsController):
+
+actionpack (5.1.4) lib/abstract_controller/base.rb:119:in `process'
+actionview (5.1.4) lib/action_view/rendering.rb:30:in `process'
+actionpack (5.1.4) lib/action_controller/metal.rb:189:in `dispatch'
+actionpack (5.1.4) lib/action_controller/metal.rb:253:in `dispatch'
+actionpack (5.1.4) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (5.1.4) lib/action_dispatch/routing/route_set.rb:31:in `serve'
+actionpack (5.1.4) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (5.1.4) lib/action_dispatch/journey/router.rb:33:in `each'
+actionpack (5.1.4) lib/action_dispatch/journey/router.rb:33:in `serve'
+actionpack (5.1.4) lib/action_dispatch/routing/route_set.rb:834:in `call'
+rack (2.0.3) lib/rack/etag.rb:25:in `call'
+rack (2.0.3) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.3) lib/rack/head.rb:12:in `call'
+rack (2.0.3) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.3) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+activerecord (5.1.4) lib/active_record/migration.rb:556:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/callbacks.rb:26:in `block in call'
+activesupport (5.1.4) lib/active_support/callbacks.rb:97:in `run_callbacks'
+actionpack (5.1.4) lib/action_dispatch/middleware/callbacks.rb:24:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/debug_exceptions.rb:59:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.4) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.4) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.4) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.4) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.4) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.4) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.4) lib/rails/engine.rb:522:in `call'
+puma (3.11.0) lib/puma/configuration.rb:225:in `call'
+puma (3.11.0) lib/puma/server.rb:624:in `handle_request'
+puma (3.11.0) lib/puma/server.rb:438:in `process_client'
+puma (3.11.0) lib/puma/server.rb:302:in `block in run'
+puma (3.11.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/posts/new" for 127.0.0.1 at 2017-11-21 23:04:52 +0300
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_form.html.erb (106.1ms)
+  Rendered posts/new.html.erb within layouts/application (114.6ms)
+Completed 500 Internal Server Error in 156ms (ActiveRecord: 0.5ms)
+
+
+
+ActionView::Template::Error (undefined method `lable' for #<ActionView::Helpers::FormBuilder:0x9775680>
+Did you mean?  label):
+    1: <%= form_for @post do |f| %>
+    2:   <div class="form-control">
+    3:     <%= f.lable :title %>
+    4:     <%= f.text_field :title %>
+    5:   </div>
+    6:   <div class="form-control">
+
+app/views/posts/_form.html.erb:3:in `block in _app_views_posts__form_html_erb__706116985_79423776'
+app/views/posts/_form.html.erb:1:in `_app_views_posts__form_html_erb__706116985_79423776'
+app/views/posts/new.html.erb:2:in `_app_views_posts_new_html_erb__545287252_79583724'
+Started GET "/posts/new" for 127.0.0.1 at 2017-11-21 23:06:21 +0300
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_form.html.erb (18.0ms)
+  Rendered posts/new.html.erb within layouts/application (27.0ms)
+Completed 200 OK in 84ms (Views: 73.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/posts" for 127.0.0.1 at 2017-11-21 23:13:48 +0300
+
+SyntaxError (C:/Sites/registrdevby/app/controllers/posts_controller.rb:28: syntax error, unexpected end-of-input, expecting keyword_end):
+
+app/controllers/posts_controller.rb:28: syntax error, unexpected end-of-input, expecting keyword_end
+Started POST "/posts" for 127.0.0.1 at 2017-11-21 23:14:11 +0300
+
+SyntaxError (C:/Sites/registrdevby/app/controllers/posts_controller.rb:28: syntax error, unexpected end-of-input, expecting keyword_end):
+
+app/controllers/posts_controller.rb:28: syntax error, unexpected end-of-input, expecting keyword_end
+Started POST "/posts" for 127.0.0.1 at 2017-11-21 23:15:41 +0300
+Processing by PostsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"pSvA5QCRc4LM43cP1Meqhg2wRTDc4pK5zQyqs69N9TC5O8nPXt5gVzwu27QbkAEWobHwpRgxacqyW7ai9yG9BA==", "post"=>{"title"=>"third title", "summary"=>"third summary", "body"=>"third body"}, "commit"=>"Сохранить"}
+   (0.0ms)  begin transaction
+  SQL (3.5ms)  INSERT INTO "posts" ("title", "summary", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["title", "third title"], ["summary", "third summary"], ["body", "third body"], ["created_at", "2017-11-21 20:15:41.850195"], ["updated_at", "2017-11-21 20:15:41.850195"]]
+   (4.5ms)  commit transaction
+Redirected to http://127.0.0.1:3000/posts/3
+Completed 302 Found in 26ms (ActiveRecord: 8.5ms)
+
+
+Started GET "/posts/3" for 127.0.0.1 at 2017-11-21 23:15:41 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"3"}
+  Post Load (0.5ms)  SELECT  "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?  [["id", 3], ["LIMIT", 1]]
+  Rendering posts/show.html.erb within layouts/application
+  Rendered posts/show.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 58ms (Views: 48.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2017-11-21 23:15:44 +0300
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_form.html.erb (1.5ms)
+  Rendered posts/new.html.erb within layouts/application (10.5ms)
+Completed 200 OK in 74ms (Views: 65.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/posts" for 127.0.0.1 at 2017-11-21 23:15:52 +0300
+Processing by PostsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"i0+u3ml6GqV90YXH+tOI/ooySMFWsBdkVWqmh1EJsIZIylUaFWcvS+gd99D8BwapUxZ27eUwhgwYx6g12psPOw==", "post"=>{"title"=>"qwer", "summary"=>"qwer", "body"=>"qwer"}, "commit"=>"Сохранить"}
+   (0.0ms)  begin transaction
+  SQL (2.0ms)  INSERT INTO "posts" ("title", "summary", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["title", "qwer"], ["summary", "qwer"], ["body", "qwer"], ["created_at", "2017-11-21 20:15:52.495162"], ["updated_at", "2017-11-21 20:15:52.495162"]]
+   (6.5ms)  commit transaction
+Redirected to http://127.0.0.1:3000/posts/4
+Completed 302 Found in 15ms (ActiveRecord: 8.5ms)
+
+
+Started GET "/posts/4" for 127.0.0.1 at 2017-11-21 23:15:52 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"4"}
+  Post Load (0.0ms)  SELECT  "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?  [["id", 4], ["LIMIT", 1]]
+  Rendering posts/show.html.erb within layouts/application
+  Rendered posts/show.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 58ms (Views: 48.3ms | ActiveRecord: 0.0ms)
